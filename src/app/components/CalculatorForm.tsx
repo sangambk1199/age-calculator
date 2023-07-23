@@ -1,6 +1,10 @@
 import FormField from "./FormField"
 
-function CalculatorForm() {
+type CalculatorFormProps = {
+    value: number
+}
+
+function CalculatorForm({value}: CalculatorFormProps) {
     const formFields = [
         {
             label: "Day",
@@ -21,7 +25,7 @@ function CalculatorForm() {
 
     return(
         <section className="flex gap-4">
-            {formFields.map(field => <FormField key={field.name} label={field.label} name={field.name} value={ field?.value } placeholder={ field.placeholder } />)}
+            {formFields.map(field => <FormField key={field.name} label={field.label} name={field.name} value={ value } placeholder={ field.placeholder } />)}
         </section>
     )
 }
