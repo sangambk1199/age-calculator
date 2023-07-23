@@ -1,7 +1,7 @@
 import FormField from "./FormField"
 
 type CalculatorFormProps = {
-    value: number
+    value?: number
 }
 
 function CalculatorForm({value}: CalculatorFormProps) {
