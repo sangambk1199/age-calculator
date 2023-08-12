@@ -11,44 +11,53 @@ type FormFieldProps = {
 }
 
 function FormField({label, dateType, value, placeholder}: FormFieldProps) {
-    const { formData, setFormData } = useFormData();
+    const { formData, setFormData } = useFormData()
 
     const [hasError, setHasError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
 
     const isValidDate = ( value: number, dateType: string ) => {
-        if( dateType === 'month' && value > 12 ) {
+        if( dateType === 'months' && value > 12 ) {
             return false
-        } else if( dateType === 'day' && value > 31 ) {
+        } else if( dateType === 'days' && value > 31 ) {
             return false
-        } else if( dateType === 'year' ) {
+        } else if( dateType === 'years' ) {
             let currentYear = new Date().getFullYear();
-
-            console.log(value, currentYear - 99);
 
             if( value < ( currentYear - 99 ) || value > currentYear ) {
                 return false
             }
         }
 
-        setFormData({
-            ...formData,
-            [dateType]: value,
-        })
-
         return true
     }
 
     const handleInput = ( value: string ) => {
+        let error = false;
+
         if( ! value || isNaN(+value) ) {
-            setHasError(true)
-            return
+            error = true
+            setErrorMessage(`This field in required`)
         }
 
         if( ! isValidDate( +value, dateType ) ) {
-            setHasError(true)
-        } else {
-            setHasError(false)
+            error = true
+            setErrorMessage(`Must be a valid ${dateType}`)
         }
+
+        if( error ) {            
+            setFormData({
+                ...formData,
+                [dateType]: undefined,
+            })
+        } else {
+            setFormData({
+                ...formData,
+                [dateType]: value,
+            })
+        }
+
+        setHasError(error)
     }
 
     return (
@@ -66,7 +75,7 @@ function FormField({label, dateType, value, placeholder}: FormFieldProps) {
                 onChange={e => handleInput( e.target.value )}
             />
             <span className={`text-xs text-red-600 ${!hasError ? 'hidden' : ''}`}>
-                Must be a valid {dateType}
+                {errorMessage}
             </span>
         </div>
     )

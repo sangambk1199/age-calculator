@@ -4,9 +4,9 @@ import React, { createContext, useContext, useState } from 'react';
 
 interface FormData {
   // Define the properties of your form data
-  month: number;
-  year: number;
-  day: number;
+  days: number | undefined;
+  months: number | undefined;
+  years: number | undefined;
   // Add other properties as needed
 }
 
@@ -19,9 +19,9 @@ const FormDataContext = createContext<FormDataContextProps | undefined>(undefine
 
 export function FormDataProvider({ children }: { children: React.ReactNode }) {
   const [formData, setFormData] = useState<FormData>({
-    day: 0,
-    month: 0,
-    year: 0
+    days: undefined,
+    months: undefined,
+    years: undefined
   });
 
   return (

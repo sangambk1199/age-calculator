@@ -8,17 +8,17 @@ function CalculatorForm({value}: CalculatorFormProps) {
     const formFields = [
         {
             label: "Day",
-            dateType: "day",
+            dateType: "days",
             placeholder: 'DD'
         },
         {
             label: "Month",
-            dateType: "month",
+            dateType: "months",
             placeholder: 'MM'
         },
         {
             label: "Year",
-            dateType: "year",
+            dateType: "years",
             placeholder: 'YYYY'
         }
     ]
