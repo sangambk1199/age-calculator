@@ -20,10 +20,9 @@ interface Age {
   }
 
 function OutputField({dataType, value}: OutputFieldProps) {
-    console.log(value, !isNaN( value ));
     return (
         <div className="text-6xl font-black italic">
-            <span className="text-violet-500">{ isNaN( value ) ? '--' : value } </span> 
+            <span className="text-violet-500">{ ( value === undefined || isNaN( value ) ) ? '--' : value } </span> 
             <span>{dataType}</span>
         </div>
     )
