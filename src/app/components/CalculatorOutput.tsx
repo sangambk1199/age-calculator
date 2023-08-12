@@ -1,15 +1,11 @@
-function CalculatorOutput() {
-    return (
-        <>
-            {['years', 'months', 'days'].map(dataType => <OutputField key={dataType} dataType={dataType} />)}
-        </>
-    )
-}
+"use client"
 
 /**
  * @param param0 
  * @returns 
  */
+
+import { useFormData } from "../context/FormDataContext";
 
 type OutputFieldProps = {
     dataType: string,
@@ -19,9 +15,18 @@ type OutputFieldProps = {
 function OutputField({dataType, value}: OutputFieldProps) {
     return (
         <div className="text-6xl font-black italic">
-            <span className="text-violet-500">-- </span> 
+            <span className="text-violet-500">{value ? value : '--'} </span> 
             <span>{dataType}</span>
         </div>
+    )
+}
+function CalculatorOutput() {
+    const { formData } = useFormData();  
+
+    return (
+        <>           
+            {Object.entries(formData).map(( [key, value] ) => <OutputField key={key} dataType={key} value={value} />)}
+        </>
     )
 }
 

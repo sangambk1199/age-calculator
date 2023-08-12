@@ -8,24 +8,24 @@ function CalculatorForm({value}: CalculatorFormProps) {
     const formFields = [
         {
             label: "Day",
-            name: "day",
+            dateType: "day",
             placeholder: 'DD'
         },
         {
             label: "Month",
-            name: "month",
+            dateType: "month",
             placeholder: 'MM'
         },
         {
             label: "Year",
-            name: "year",
+            dateType: "year",
             placeholder: 'YYYY'
         }
     ]
 
     return(
         <section className="flex gap-4">
-            {formFields.map(field => <FormField key={field.name} label={field.label} name={field.name} value={ value } placeholder={ field.placeholder } />)}
+            {formFields.map(field => <FormField key={field.dateType} {...field} value={ value } />)}
         </section>
     )
 }
