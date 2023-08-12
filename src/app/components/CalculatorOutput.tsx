@@ -38,7 +38,11 @@ function CalculatorOutput() {
     };
 
     if( formData.days && formData.months && formData.years ) {
-        age = calculateAgeFromObject(formData);
+        age = calculateAgeFromObject({
+            days: formData.days,
+            months: formData.months,
+            years: formData.years
+        });
     }
 
     return (
